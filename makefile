@@ -3,7 +3,8 @@ op=-Wall -Wextra
 
 all : es.o livre.o biblio.o tpBiblio.c 	
 	$(c) $(op)  es.o livre.o biblio.o tpBiblio.c -o exe
-
+run : all
+	./exe
 es.o : es.c
 	$(c) $(op) -c es.c	
 livre.o : livre.c
