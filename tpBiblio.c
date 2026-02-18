@@ -43,7 +43,9 @@ return choix;
 int main()
 {
 int reponse,chx;
-T_Bibliotheque B; 
+T_Bibliotheque B;
+T_Titre titre;
+T_livre livre; 
 init( &B );
 
 do
@@ -62,9 +64,16 @@ switch(chx)
 					printf("La bibliotheque est vide");
 
 			break;	
-	case 3 : reponse=(&B);
-			if (reponse==0)	
-
+	case 3 : 
+			printf("quel est le titre?\n> ");
+			scanf("%s",&titre);
+			reponse=rechercherBibliotheque(&B,&titre,&livre);
+			if (reponse==0)	printf("aucun livres de ce titre est enregistré.");
+			else{
+				if(reponse>1) printf("il y a %d livres enregistré sous ce titre, voici le premier:\n");
+				else printf("voici le livre:\n");
+				afficherLivre(&livre);
+			}
 			break;	
 	case 4 : reponse=afficherBibliotheque(&B);
 			if (reponse==0)	

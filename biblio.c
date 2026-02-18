@@ -43,6 +43,13 @@ if(ptrB->nbLivres==0)
 }
 
 
-
-
-
+int  rechercherBibliotheque(const T_Bibliotheque  *ptrB,char* Titre_demandé,T_livre* livre_resultat){
+	int nb = 0, i;
+	for (i=0;(ptrB->nbLivres)>i;i++){
+		if(strcmp(ptrB->etagere[i].titre,Titre_demandé)==0){
+			nb++;
+			if(nb == 1) livre_resultat = &(ptrB->etagere[i]);
+		}
+	}
+	return i;
+}
