@@ -1,6 +1,8 @@
 // TP GESTION D'UNE BIBLIOTHEQUE 
 #include "biblio.h"
 
+void sauvegarde(T_Bibliotheque *ptrB);
+
 int menu()
 {
 	int choix;
@@ -60,10 +62,20 @@ switch(chx)
 					printf("La bibliotheque est vide");
 
 			break;	
-	
-	
-	
-	
+	case 3 : reponse=(&B);
+			if (reponse==0)	
+
+			break;	
+	case 4 : reponse=afficherBibliotheque(&B);
+			if (reponse==0)	
+					printf("La bibliotheque est vide");
+
+			break;	
+	case 5 : reponse=afficherBibliotheque(&B);
+			if (reponse==0)	
+					printf("La bibliotheque est vide");
+
+			break;	
 	
 	}
 
