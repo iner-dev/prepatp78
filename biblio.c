@@ -65,7 +65,7 @@ int  rechercherBibliothequeAuteur(const T_Bibliotheque  *ptrB,T_Aut* aut_demandÃ
 	return nb;
 }
 
-int rm_Livre(T_Bibliotheque  *ptrB,int id){
+int supprimerLivre(T_Bibliotheque  *ptrB,int id){
 	if(id>=0 && id <ptrB->nbLivres){
 		ptrB->nbLivres -= 1;
 		ptrB->etagere[id] = ptrB->etagere[ptrB->nbLivres];

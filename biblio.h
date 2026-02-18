@@ -24,7 +24,7 @@ int ajouterLivre(T_Bibliotheque  *ptrB);
 int  afficherBibliotheque(const T_Bibliotheque  *ptrB);
 int  rechercherBibliothequeTitre(const T_Bibliotheque  *ptrB,T_Titre* Titre_demandé,int* ID_livre);
 int  rechercherBibliothequeAuteur(const T_Bibliotheque  *ptrB,T_Aut* aut_demandé,int* ID_livre);
-int rm_Livre(T_Bibliotheque  *ptrB,int id);
+int supprimerLivre(T_Bibliotheque  *ptrB,int id);
 
 
 #endif

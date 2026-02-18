@@ -104,7 +104,7 @@ switch(chx)
 	case 5 :
 			printf("quelle est l'ID\n> ");
 			scanf("%d",&id);
-			reponse=rm_Livre(&B,id);
+			reponse=supprimerLivre(&B,id);
 			if (reponse==EXIT_FAILURE)	
 					printf("il y a eut une erreur durant l'effacement.\n");
 			else printf("le livre a bien été suprimé.\n");
