@@ -22,7 +22,9 @@ typedef struct
 void init (T_Bibliotheque *ptrB);
 int ajouterLivre(T_Bibliotheque  *ptrB);
 int  afficherBibliotheque(const T_Bibliotheque  *ptrB);
-int  rechercherBibliotheque(const T_Bibliotheque  *ptrB,char* Titre_demandé,T_livre* livre_resultat);
+int  rechercherBibliothequeTitre(const T_Bibliotheque  *ptrB,T_Titre* Titre_demandé,int* ID_livre);
+int  rechercherBibliothequeAuteur(const T_Bibliotheque  *ptrB,T_Aut* aut_demandé,int* ID_livre);
+int rm_Livre(T_Bibliotheque  *ptrB,int id);
 
 
 #endif

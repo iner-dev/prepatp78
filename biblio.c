@@ -43,13 +43,33 @@ if(ptrB->nbLivres==0)
 }
 
 
-int  rechercherBibliotheque(const T_Bibliotheque  *ptrB,char* Titre_demandé,T_livre* livre_resultat){
+int  rechercherBibliothequeTitre(const T_Bibliotheque  *ptrB,T_Titre* Titre_demandé,int* ID_livre){
 	int nb = 0, i;
 	for (i=0;(ptrB->nbLivres)>i;i++){
 		if(strcmp(ptrB->etagere[i].titre,Titre_demandé)==0){
 			nb++;
-			if(nb == 1) livre_resultat = &(ptrB->etagere[i]);
+			if(nb == 1) *ID_livre = i;
 		}
 	}
-	return i;
+	return nb;
+}
+
+int  rechercherBibliothequeAuteur(const T_Bibliotheque  *ptrB,T_Aut* aut_demandé,int* ID_livre){
+	int nb = 0, i;
+	for (i=0;(ptrB->nbLivres)>i;i++){
+		if(strcmp(ptrB->etagere[i].auteur,aut_demandé)==0){
+			nb++;
+			if(nb == 1) *ID_livre = i;
+		}
+	}
+	return nb;
+}
+
+int rm_Livre(T_Bibliotheque  *ptrB,int id){
+	if(id>=0 && id <ptrB->nbLivres){
+		ptrB->nbLivres -= 1;
+		ptrB->etagere[id] = ptrB->etagere[ptrB->nbLivres];
+		return EXIT_SUCCESS;
+	}
+	return EXIT_FAILURE;
 }

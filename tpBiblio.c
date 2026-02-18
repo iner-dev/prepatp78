@@ -2,6 +2,7 @@
 #include "biblio.h"
 
 void sauvegarde(T_Bibliotheque *ptrB);
+void chargement(T_Bibliotheque *ptrB);
 
 int menu()
 {
@@ -32,7 +33,7 @@ printf("\n 10 - trier les livres (par annee)");
 
 printf("\n 0 - QUITTER");
 printf("\n Votre choix : ");
-scanf("%d[^\n]",&choix);getchar();
+scanf("%d",&choix);getchar();
 return choix;
 
 
@@ -42,12 +43,14 @@ return choix;
 
 int main()
 {
-int reponse,chx;
+int reponse,chx,id;
 T_Bibliotheque B;
 T_Titre titre;
+T_Aut auteur;
 T_livre livre; 
+T_livre* livre_addr;
 init( &B );
-
+chargement( &B );
 do
 {
 chx= menu();
@@ -66,24 +69,45 @@ switch(chx)
 			break;	
 	case 3 : 
 			printf("quel est le titre?\n> ");
-			scanf("%s",&titre);
-			reponse=rechercherBibliotheque(&B,&titre,&livre);
+			if (fgets(titre, sizeof titre, stdin)) {
+				size_t len = strlen(titre);
+				if (len && titre[len-1] == '\n') titre[len-1] = '\0';
+			} else {
+				titre[0] = '\0';
+			}
+			reponse=rechercherBibliothequeTitre(&B,&titre,&id);
 			if (reponse==0)	printf("aucun livres de ce titre est enregistré.");
 			else{
-				if(reponse>1) printf("il y a %d livres enregistré sous ce titre, voici le premier:\n");
+				if(reponse>1) printf("il y a %d livres enregistré sous ce titre, voici le premier:\n",reponse);
 				else printf("voici le livre:\n");
-				afficherLivre(&livre);
+				printf("id = %d ",id);
+				afficherLivre(&(B.etagere[id]));
 			}
-			break;	
-	case 4 : reponse=afficherBibliotheque(&B);
-			if (reponse==0)	
-					printf("La bibliotheque est vide");
-
-			break;	
-	case 5 : reponse=afficherBibliotheque(&B);
-			if (reponse==0)	
-					printf("La bibliotheque est vide");
-
+			break;
+	case 4 : 
+			printf("quel est l'auteur?\n> ");
+			if (fgets(auteur, sizeof auteur, stdin)) {
+				size_t len = strlen(auteur);
+				if (len && auteur[len-1] == '\n') auteur[len-1] = '\0';
+			} else {
+				auteur[0] = '\0';
+			}
+			reponse=rechercherBibliothequeAuteur(&B,&auteur,&id);
+			if (reponse==0)	printf("aucun livres de cette auteur est enregistré.");
+			else{
+				if(reponse>1) printf("il y a %d livres enregistré sous cette auteur, voici le premier:\n",reponse);
+				else printf("voici le livre:\n");
+				printf("id = %d ",id);
+				afficherLivre(&(B.etagere[id]));
+			}
+			break;
+	case 5 :
+			printf("quelle est l'ID\n> ");
+			scanf("%d",&id);
+			reponse=rm_Livre(&B,id);
+			if (reponse==EXIT_FAILURE)	
+					printf("il y a eut une erreur durant l'effacement.\n");
+			else printf("le livre a bien été suprimé.\n");
 			break;	
 	
 	}
@@ -96,6 +120,29 @@ sauvegarde(&B);
 
 
 return 0;
+
+}
+
+void chargement(T_Bibliotheque *ptrB)
+{
+FILE *fic=NULL; //le type FILE
+int i=0;
+fic=fopen("baseLivres","r"); // r = le mode read
+//fopen renvoie NULL si probleme (disque plein, disque non accessible ...
+if (fic!=NULL)
+	{
+	do
+		{
+
+		fread(  &(ptrB->etagere[i]) ,sizeof(T_livre),1,fic);
+		i++;
+		}
+		while(!feof(fic));
+	fclose(fic);
+	ptrB->nbLivres=i-1;
+	puts("CHARGEMENT  REUSSI ..............");
+	}
+	else puts("ECHEC DE CHARGEMENT  !!!!!  ");
 
 }
 

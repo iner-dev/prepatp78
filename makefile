@@ -5,6 +5,9 @@ all : es.o livre.o biblio.o tpBiblio.c
 	$(c) $(op)  es.o livre.o biblio.o tpBiblio.c -o exe
 run : all
 	./exe
+debug : 
+	gcc -g *.c -o exe
+	gdb exe
 es.o : es.c
 	$(c) $(op) -c es.c	
 livre.o : livre.c
