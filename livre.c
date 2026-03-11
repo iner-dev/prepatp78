@@ -15,3 +15,21 @@ afficherChaine("AUTEUR :", (ptrL->auteur ));
 printf("\n");
 }
 
+int emprunterLivre(T_livre *livre){
+    if(livre->emprunteur[0]=='\0'){
+        lireChaine("quelle est le nom de l'emprunteur\n> ",livre->emprunteur,K_MaxEmp);
+        printf("enregistrement effectué\n");
+        return EXIT_SUCCESS;
+    }else printf("[ERROR] -> livre deja emprunter\n");
+    return EXIT_FAILURE;
+}
+
+
+int restituerLivre(T_livre *livre){
+    if(livre->emprunteur[0]!='\0'){
+        livre->emprunteur[0]='\0';
+        printf("restitusion effectuer effectué\n");
+        return EXIT_SUCCESS;
+    }else printf("[ERROR] -> livre deja non emprunter\n");
+    return EXIT_FAILURE;
+}

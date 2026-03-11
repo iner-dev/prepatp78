@@ -73,3 +73,35 @@ int supprimerLivre(T_Bibliotheque  *ptrB,int id){
 	}
 	return EXIT_FAILURE;
 }
+
+void tri_biblio(T_Bibliotheque *ptrB,int min,int max,const int line){
+	int mid, cond, i;
+	T_livre aux_livre;
+	if(max-min == 0){
+		return;
+	}else{
+		mid = (min+max)/2;
+		tri_biblio(ptrB,min,mid,line);
+		tri_biblio(ptrB,mid+1,max,line);
+		while(min<max){
+			switch (line)
+			{
+			case 0:
+				cond = (cmp_charlst(ptrB->etagere[min].titre,ptrB->etagere[mid].titre)>0);
+				printf("cond = %d\n",cond);
+				break;
+			default:
+				cond = 0;
+			}
+			if(cond){
+				aux_livre = ptrB->etagere[mid];
+				for(i = min;i<mid;i++){
+					ptrB->etagere[i+1] = ptrB->etagere[i];
+				}
+				mid++;
+				ptrB->etagere[min] = aux_livre;
+			}
+			min++;
+		}
+	}
+}

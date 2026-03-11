@@ -47,8 +47,6 @@ int reponse,chx,id;
 T_Bibliotheque B;
 T_Titre titre;
 T_Aut auteur;
-T_livre livre; 
-T_livre* livre_addr;
 init( &B );
 chargement( &B );
 do
@@ -109,7 +107,28 @@ switch(chx)
 					printf("il y a eut une erreur durant l'effacement.\n");
 			else printf("le livre a bien été suprimé.\n");
 			break;	
-	
+	case 6 :
+			printf("quelle est l'ID du livre\n> ");
+			scanf("%d",&id);
+			if(id<0 || id>= B.nbLivres){
+				printf("[ERROR] ID non valide");
+				break;
+			}
+			emprunterLivre(&B.etagere[id]);
+			break;	
+	case 7 :
+			printf("quelle est l'ID du livre\n> ");
+			scanf("%d",&id);
+			if(id<0 || id>= B.nbLivres){
+				printf("[ERROR] ID non valide");
+				break;
+			}
+			restituerLivre(&B.etagere[id]);
+			break;	
+	case 8:
+			printf("debut du tri\n");
+			tri_biblio_titre(&B);
+			printf("fin du tri\n");
 	}
 
 }while(chx!=0);

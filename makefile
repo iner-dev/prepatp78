@@ -1,10 +1,12 @@
 c=gcc
-op=-Wall -Wextra
+op=-Wall -Wextra -g
 
 all : es.o livre.o biblio.o tpBiblio.c 	
 	$(c) $(op)  es.o livre.o biblio.o tpBiblio.c -o exe
 run : all
 	./exe
+gdb : all
+	gdb exe
 clean :
 	rm *.o exe baselivres
 debug : 

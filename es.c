@@ -42,6 +42,7 @@ return lachaine;
 
 char * lireChaine(const char *  nomChamps,  char *chaine,int nbcarac)
 {
+getchar();
 printf("%s  ",nomChamps);
 lire(chaine,nbcarac); // lire du TP4 (modifiée)
 return chaine;
@@ -51,4 +52,15 @@ void afficherChaine(const char *nomChamp, const char *valeur)
 {
 printf("%s %s",nomChamp,valeur);
 
+}
+
+int cmp_charlst(char* S1,char* S2){
+	int i = 0;
+	while(1){
+		if(S1[i]!=S2[i]){
+			return S1[i] - S2[i];
+		}
+		if(S1[i]=='/0') return 0;
+ 		i++;
+	}
 }
